@@ -1,105 +1,108 @@
-#include "pch.h"
 #include <iostream>
 #include <vector>
 using namespace std;
-void wypisz(int a)
+
+void wypisz(int x)
 {
-	cout << a << "\n";
+    cout << x << endl;
 }
-void wypisz(vector<int>tab)
+
+void wypisz(vector<int> tab)
 {
-	for (int i = 0; i < tab.size(); i++)
-	{
-		cout << tab[i] << " ";
-	}
-	cout << "\n";
+    for (int i = 0; i < tab.size(); i++)
+    {
+        cout << tab[i] << " ";
+    }
+    cout << endl;
 }
-void wypisz(vector<vector<int>>tab)
+
+void wypisz(vector<vector<int>> tab)
 {
-	wypisz(tab[0]);
-	wypisz(tab[1]);
+    wypisz(tab[0]);
+    wypisz(tab[1]);
 }
-bool czyNalezy(vector<int>tab, int element)
+
+bool czynalezy(vector<int> tab, int x)
 {
-	for (int i = 0; i < tab.size(); i++)
-	{
-		if (tab[i] == element)
-		{
-			return true;
-		}
-	}
-	return false;
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (tab[i] == x)
+        {
+            return true;
+        }
+    }
+    return false;
 }
-bool czyZawiera(vector<int>tab, vector<int>tab2)
+
+bool czyzawiera(vector<int> tab1, vector<int> tab2)
 {
-	for (int i = 0; i < tab.size(); i++)
-	{
-		if (!czyNalezy(tab, tab2[i]))
-		{
-			return false;
-		}
-	}
-	return true;
+    for (int i = 0; i < tab2.size(); i++)
+    {
+        if (!czynalezy(tab1, tab2[i]))
+            return false;
+    }
+    return true;
 }
-int min(vector<int>tab)
+
+int suma(int a, int b)
 {
-	int p = tab[0];
-	for (int i = 0; i < tab.size(); i++)
-	{
-		if (tab[i] < p)
-		{
-			p = tab[i];
-		}
-	}
-	return p;
+   return a + b;
 }
-vector<int>unikalna(vector<int>tab)
+
+int max(vector<int> tab)
 {
-	vector<int>wynik;
-	for (int i = 0; i < tab.size(); i++)
-	{
-		if (!czyNalezy(wynik, tab[i]))
-		{
-			wynik.push_back(tab[i]);
-		}
-	}
-	return wynik;
+    int wynik = tab[0];
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (wynik < tab[i])
+            wynik = tab[i];
+    }
+    return wynik;
 }
-vector<vector<int>>wystepowanie(vector<int>tab)
+
+vector<int> unikalnosc(vector<int> tab)
 {
-	vector<vector<int>>wynik;
-	vector<int> j = unikalna(tab);
-	vector<int> d;
-	for (int i = 0; i < j.size(); i++)
-	{
-		int a = 0;
-		for (int b = 0; b < tab.size(); b++)
-		{
-			if (tab[b] == j[i])
-			{
-				a++;
-			}
-		}
-		d.push_back(a);
-	}
-	wynik.push_back(j);
-	wynik.push_back(d);
-	return wynik;
+    vector<int> wynik;
+    for (int i = 0; i < tab.size(); i++)
+    {
+        if (!czynalezy(wynik, tab[i]))
+            wynik.push_back(tab[i]);
+    }
+    return wynik;
 }
+vector<vector<int>> czestosc(vector<int> tab)
+{
+   vector<vector<int>> wynik;
+    vector<int> u = unikalnosc(tab);
+    vector<int> c;
+
+    for (int i = 0; i < u.size(); i++)
+    {
+        int ile = 0;
+        for (int j = 0; j < tab.size(); j++)
+        {
+            if (tab[j] == u[i])
+                ile++;
+        }
+        c.push_back(ile);
+    }
+    wynik.push_back(u);
+    wynik.push_back(c);
+    return wynik;
+}
+
+
+
 int main()
 {
-	vector<int>tab = { 2,5,9,1 };
-	vector<int>tab2 = { 1,2,4,7 };
-	vector<int>tab3 = { 1,2,2,3,3,4,4 };
-	wypisz(min(tab));
-	wypisz(unikalna(tab3));
-	if (czyZawiera(tab, tab2))
-	{
-		cout << "prosting\n";
-	}
-	else
-	{
-		cout << "krzywing\n";
-	}
-	wypisz(wystepowanie(tab3));
+    std::cout << "Hello World!\n";
+    vector<int> tab1 = { 3,5,5,1,2,8,8 };
+    vector<int> tab2 = { 5,5,1 };
+
+    wypisz(max(tab1));
+    wypisz(czynalezy(tab1, 5));
+    wypisz(czyzawiera(tab1, tab2));
+    wypisz(unikalnosc(tab1));
+    wypisz(tab1);
+    wypisz(czestosc(tab1));
 }
