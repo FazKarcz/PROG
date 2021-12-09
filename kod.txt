@@ -1,115 +1,139 @@
-include <iostream>
+#include <iostream>
 #include <vector>
-#include <map>
+#include<map>
 using namespace std;
 void wypisz(int a)
 {
-    cout << a << "\n";
+	cout << a << "\n";
 }
 void wypisz(vector<int>tab)
 {
-    for (int i = 0; i < tab.size(); i++)
-    {
-        cout << tab[i];
-    }
+	for (int i = 0; i < tab.size(); i++)
+	{
+		cout << tab[i] << "";
+	}
+	cout << "\n";
 }
-void wypisz(map<int, int> m)
+void wypisz(map<int, int>m)
 {
-    for (auto elem : m)
-    {
-        cout << elem.first << "\t" << elem.second << "\n";
-    }
+	for (auto jd : m)
+	{
+		cout << jd.first << " " << jd.second << "\n";
+	}
 }
 bool czyNalezy(vector<int>tab, int element)
 {
-    for (int i = 0; i < tab.size(); i++)
-    {
-        if (tab[i] == element)
-        {
-            return true;
-        }
-    }
-    return false;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] == element)
+		{
+			return true;
+		}
+	}
+	return false;
 }
-bool czyNalezyMAPA(map<int, int>m,int klucz)
+bool czyNalezyMAPA(map<int, int>m, int kluczens)
 {
-    for (auto item: m)
-    {
-        if (item.first == klucz)
-        {
-            return true;
-        }
-    }
-    return false;
+	for (auto jd : m)
+	{
+		if (jd.first == kluczens)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 bool czyZawiera(vector<int>tab, vector<int>tab2)
 {
-    for (int i = 0; i < tab.size(); i++)
-    {
-        if (!czyNalezy(tab, tab2[i]))
-        {
-            return false;
-        }
-    }
-    return true;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czyNalezy(tab, tab2[i]))
+		{
+			return true;
+		}
+	}
+	return false;
 }
-int min(vector<int>tab)
+bool lustro(vector<int>tab)
 {
-    int k = 0;
-    for (int i = 0; i < tab.size(); i++)
-    {
-        if (tab[i] < k)
-        {
-            k = tab[i];
-        }
-    }
-    return k;
+	int koniec = tab.size() - 1;
+	for (int i = 0; i < tab.size() / 2; i++)
+	{
+		if (tab[i] != tab[koniec-i])
+		{
+			return true;
+		}
+	}
+	return false;
+}
+int max(vector<int>tab)
+{
+	int p = tab[0];
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i] > p)
+		{
+			p=tab[i];
+		}
+	}
+	return p;
 }
 vector<int>unikalna(vector<int>tab)
 {
-    vector<int>wynik;
-    {
-        for (int i = 0; i < tab.size(); i++)
-        {
-            if (!czyNalezy(wynik, tab[i]))
-            {
-                wynik.push_back(tab[i]);
-            }
-        }
-    }
-    return wynik;
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czyNalezy(wynik, tab[i]))
+		{
+			wynik.push_back(tab[i]);
+		}
+	}
+	return wynik;
 }
-map<int, int>wystepowanie(vector<int>tab)
+map<int, int>czestosc(vector<int>tab)
 {
-    map<int, int>wynik;
-    for (int i = 0; i < tab.size(); i++)
-    {
-        if (!czyNalezyMAPA(wynik, tab[i]))
-        {
-            wynik.insert({ tab[i],1 });
-        }
-        else
-        {
-            wynik[tab[i]]++;
-        }
-    }
-    return wynik;
+	map<int, int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (!czyNalezyMAPA(wynik, tab[i]))
+		{
+			wynik.insert({ tab[i],1 });
+		}
+		else
+		{
+			wynik[tab[i]]++;
+		}
+	}
+	return wynik;
+}
+vector<int> podzielne(vector<int>tab)
+{
+	vector<int>wynik;
+	for (int i = 0; i < tab.size(); i++)
+	{
+		if (tab[i]%3 == 0)
+		{
+			wynik.push_back(tab[i]);
+		}
+	}
+	return wynik;
 }
 int main()
 {
-    vector<int>tab = { 2,3,9,4,1 };
-    vector<int>tab2 = { 1,1,2,2,3,3 };
-    map<int, int>m;
-    m.insert({ 3,1 });
-    m.insert({ 2,5 });
-    m.insert({ 3,9 });
-    if (czyNalezyMAPA(m, 8))
-    {
-        std::cout << "Nalezy klucz\n";
-    }
-    else
-    {
-        std::cout << "Nie nalezy klucz\n";
-    }
-    wypisz(wystepowanie(tab2));
+	vector<int>tab = { 5,2,1,9 };
+	vector<int>tab2 = { 1,1,2,2,3,3,4,4,4 };
+	vector<int>tab3 = { 1,1,2,2 };
+	wypisz(max(tab));
+	wypisz(unikalna(tab2));
+	wypisz(czestosc(tab2));
+	if (czyZawiera(tab, tab2))
+	{
+		cout << "proste\n";
+	}
+	else
+	{
+		cout << "krzywe\n";
+	}
+	wypisz(lustro(tab3));
+	wypisz(podzielne(tab));
 }
