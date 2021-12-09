@@ -118,6 +118,16 @@ vector<int> podzielne(vector<int>tab)
 	}
 	return wynik;
 }
+vector<int> genereuj(int n, int max = 50, int min = 0)
+{
+	vector<int>wynik;
+	srand(time(NULL));
+	for (int i = 0; i < n; i++)
+	{
+		wynik.push_back(rand() % (max - min) + min);
+	}
+	return wynik;
+}
 int main()
 {
 	vector<int>tab = { 5,2,1,9 };
