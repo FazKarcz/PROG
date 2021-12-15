@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include<map>
+#include <map>
 using namespace std;
 void wypisz(int a)
 {
@@ -10,7 +10,7 @@ void wypisz(vector<int>tab)
 {
 	for (int i = 0; i < tab.size(); i++)
 	{
-		cout << tab[i] << "";
+		cout << tab[i] << " ";
 	}
 	cout << "\n";
 }
@@ -21,11 +21,11 @@ void wypisz(map<int, int>m)
 		cout << jd.first << " " << jd.second << "\n";
 	}
 }
-bool czyNalezy(vector<int>tab, int element)
+bool czyNalezy(vector<int>tab, int cos)
 {
 	for (int i = 0; i < tab.size(); i++)
 	{
-		if (tab[i] == element)
+		if (tab[i] == cos)
 		{
 			return true;
 		}
@@ -43,40 +43,28 @@ bool czyNalezyMAPA(map<int, int>m, int kluczens)
 	}
 	return false;
 }
-bool czyZawiera(vector<int>tab, vector<int>tab2)
+bool czyZawiera(vector<int>tab,vector<int>tab2)
 {
 	for (int i = 0; i < tab.size(); i++)
 	{
 		if (!czyNalezy(tab, tab2[i]))
 		{
-			return true;
+			return false;
 		}
 	}
-	return false;
+	return true;
 }
-bool lustro(vector<int>tab)
+int min(vector<int>tab)
 {
-	int koniec = tab.size() - 1;
-	for (int i = 0; i < tab.size() / 2; i++)
-	{
-		if (tab[i] != tab[koniec-i])
-		{
-			return true;
-		}
-	}
-	return false;
-}
-int max(vector<int>tab)
-{
-	int p = tab[0];
+	int a = tab[0];
 	for (int i = 0; i < tab.size(); i++)
 	{
-		if (tab[i] > p)
+		if (tab[i] < a)
 		{
-			p=tab[i];
+			tab[i]= a;
 		}
 	}
-	return p;
+	return a;
 }
 vector<int>unikalna(vector<int>tab)
 {
@@ -90,7 +78,7 @@ vector<int>unikalna(vector<int>tab)
 	}
 	return wynik;
 }
-map<int, int>czestosc(vector<int>tab)
+map<int, int>wystepowanie(vector<int>tab)
 {
 	map<int, int>wynik;
 	for (int i = 0; i < tab.size(); i++)
@@ -101,28 +89,27 @@ map<int, int>czestosc(vector<int>tab)
 		}
 		else
 		{
-			wynik[tab[i]]++;
+			wynik[tab[i]];
 		}
 	}
 	return wynik;
 }
-vector<int> podzielne(vector<int>tab)
+vector<int>dzielnik(vector<int>tab, int dupa)
 {
 	vector<int>wynik;
 	for (int i = 0; i < tab.size(); i++)
 	{
-		if (tab[i]%3 == 0)
+		if (tab[i] % dupa == 0)
 		{
 			wynik.push_back(tab[i]);
 		}
 	}
 	return wynik;
 }
-vector<int> genereuj(int n, int max = 50, int min = 0)
+vector<int>generuj(int jd,int min = 0,int max = 50)
 {
 	vector<int>wynik;
-	srand(time(NULL));
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < jd; i++)
 	{
 		wynik.push_back(rand() % (max - min) + min);
 	}
@@ -130,20 +117,6 @@ vector<int> genereuj(int n, int max = 50, int min = 0)
 }
 int main()
 {
-	vector<int>tab = { 5,2,1,9 };
-	vector<int>tab2 = { 1,1,2,2,3,3,4,4,4 };
-	vector<int>tab3 = { 1,1,2,2 };
-	wypisz(max(tab));
-	wypisz(unikalna(tab2));
-	wypisz(czestosc(tab2));
-	if (czyZawiera(tab, tab2))
-	{
-		cout << "proste\n";
-	}
-	else
-	{
-		cout << "krzywe\n";
-	}
-	wypisz(lustro(tab3));
-	wypisz(podzielne(tab));
+	srand(time(NULL));
+	wypisz(generuj(4));
 }
