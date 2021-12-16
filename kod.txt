@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <iostream>
 #include <vector>
 #include <map>
@@ -43,7 +44,7 @@ bool czyNalezyMAPA(map<int, int>m, int kluczens)
 	}
 	return false;
 }
-bool czyZawiera(vector<int>tab,vector<int>tab2)
+bool czyZawiera(vector<int>tab, vector<int>tab2)
 {
 	for (int i = 0; i < tab.size(); i++)
 	{
@@ -61,7 +62,7 @@ int min(vector<int>tab)
 	{
 		if (tab[i] < a)
 		{
-			tab[i]= a;
+			tab[i] = a;
 		}
 	}
 	return a;
@@ -94,19 +95,19 @@ map<int, int>wystepowanie(vector<int>tab)
 	}
 	return wynik;
 }
-vector<int>dzielnik(vector<int>tab, int dupa)
+vector<int>dzielnik(vector<int>tab, int dupa,int reszta=0)
 {
 	vector<int>wynik;
 	for (int i = 0; i < tab.size(); i++)
 	{
-		if (tab[i] % dupa == 0)
+		if (tab[i] % dupa == reszta)
 		{
 			wynik.push_back(tab[i]);
 		}
 	}
 	return wynik;
 }
-vector<int>generuj(int jd,int min = 0,int max = 50)
+vector<int>generuj(int jd, int min = 0, int max = 50)
 {
 	vector<int>wynik;
 	for (int i = 0; i < jd; i++)
@@ -117,6 +118,13 @@ vector<int>generuj(int jd,int min = 0,int max = 50)
 }
 int main()
 {
-	srand(time(NULL));
-	wypisz(generuj(4));
+	//srand(time(NULL));
+	int a;
+	cin >> a;
+	vector<int>losowy = generuj(a);
+	wypisz(losowy);
+	losowy = dzielnik(losowy, 3);
+	wypisz(losowy);
+
+	//wypisz(pod)
 }
