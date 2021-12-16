@@ -118,13 +118,16 @@ vector<int>generuj(int jd, int min = 0, int max = 50)
 }
 int main()
 {
-	//srand(time(NULL));
 	int a;
 	cin >> a;
-	vector<int>losowy = generuj(a);
-	wypisz(losowy);
-	losowy = dzielnik(losowy, 3);
-	wypisz(losowy);
-
-	//wypisz(pod)
+	for (int i = 0; i < a; i++)
+	{
+		cout << "*";
+		for (int i = 0; i = a; i++)
+		{
+			cout << "*" << endl;
+		}
+	}
 }
+//zrób palindron dla typu string//
+//dokończ rysowanie choinki//
