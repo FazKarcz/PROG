@@ -1,0 +1,89 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+void wypisz(vector<int>tab)
+{
+    for (int i = 0; i < tab.size(); i++)
+    {
+        cout << tab[i] << " ";
+    }
+    cout << endl;
+}
+int SumaCzesciowa(vector<int>tab)
+{
+    int w = 0;
+
+    for (int i = 0; i < tab.size(); i++)
+    {
+        for (int j = i; j < tab.size(); j++)
+        {
+            int sum = 0;
+            for (int k = i; k <= j; k++)
+            {
+                sum += tab[k];
+            }
+            if (sum > w)
+            {
+                w = sum;
+            }
+        }
+    }
+    return w;
+}
+bool palindrom(string tekst)
+{
+    int koniec = tekst.size() - 1;
+    for (int i = 0; i < tekst.size() / 2; i++)
+    {
+        if (tekst[i] != tekst[koniec - i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+bool funkcja(int x)
+{
+    for (int i = 2; i < x; i++)
+    {
+        int n = 0;
+        for (int j = i; j <= x; j = i * j)
+        {
+            n++;
+            if (x == j)
+            {
+                cout << "y=" << i << " n=" << n << endl;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+void szukaj(std::string& tekst, std::string& szukaj)
+{
+    size_t znalezionaPozycja = tekst.find(szukaj);
+    if (znalezionaPozycja == std::string::npos)
+    {
+        std::cout << tekst.length() << endl;
+    }
+    else
+    {
+        std::cout << "znak zostal odnaleziony na pozycji " << znalezionaPozycja << endl;
+    }
+}
+int main()
+{
+    /*
+    vector<int>tab{ 2,4,-6,7 };
+    wypisz(sumaczesciowa2(tab));
+    string dupa = "AaBaA";
+    string dupcia = "kurwie";
+    cout << palindrom(dupcia);
+    cout << endl;
+    cout << funkcja(9);
+    */
+    string dupa = "KURWA";
+    string n = "R";
+    szukaj(dupa,n);
+
+}
